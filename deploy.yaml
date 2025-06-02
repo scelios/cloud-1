@@ -26,26 +26,53 @@
         sudo apt-get update
         sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 
-    - name: Cloner le dépôt Git
-      git:
-        repo: "https://github.com/scelios/inception.git"
-        dest: "/home/{{ ansible_user }}/inception"
-        version: "main"
+    # - name: Cloner le dépôt Git
+      # git:
+        # repo: "https://github.com/Kigotrunk/Inception_school.git"
+        # repo : "https://github.com/scelios/inception.git"
+        # dest: "/home/{{ ansible_user }}/inception"
+        # version: "main"
 
-    - name: Copy .env to the git
+    - name: Copy docker
       copy:
-        src: "{{ env }}"
-        dest: "/home/{{ ansible_user }}/inception/.env"
+        src: "{{ docker }}"
+        dest: "/home/{{ ansible_user }}/inception"
         owner: "{{ ansible_user }}"
         group: "{{ ansible_user }}"
         mode: "0644"
 
-    - name: Exécuter `make init`
-      command:
-        chdir: "/home/{{ ansible_user }}/inception"
-        cmd: "make init"
+    # - name: Copy .env to the git
+    #   copy:
+    #     src: "{{ env }}"
+    #     dest: "/home/{{ ansible_user }}/inception/.env"
+    #     owner: "{{ ansible_user }}"
+    #     group: "{{ ansible_user }}"
+    #     mode: "0644"
+      
+    - name: Add ip to env
+      shell: |
+        export IPSERV={{ ansible_host }}
 
-    - name: Exécuter `make up`
+    # - name: Launch docker
+    #   command:
+    #     chdir: "/home/{{ ansible_user }}/inception/docker"
+    #     cmd: "docker compose up"
+
+    # - name: Copy .env to the git
+    #   copy:
+    #     src: "{{ env }}"
+    #     dest: "/home/{{ ansible_user }}/inception/srcs/.env"
+    #     owner: "{{ ansible_user }}"
+    #     group: "{{ ansible_user }}"
+    #     mode: "0644"
+
+    - name: Exécuter `make`
       command:
-        chdir: "/home/{{ ansible_user }}/inception"
-        cmd: "make up"
+        chdir: "/home/{{ ansible_user }}/inception/docker"
+        cmd: "docker compose up -d"
+
+    # - name: Exécuter `make up`
+    #   command:
+    #     chdir: "/home/{{ ansible_user }}/inception"
+    #     cmd: "make up"
+
