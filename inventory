@@ -1,2 +1,2 @@
 [servers]
-vm_google ansible_host=34.155.237.213 ansible_user=scelios ansible_ssh_private_key_file=~/.ssh/id_rsa env=/media/sf_vm_partage/cloud-1/.env
+vm_google ansible_host=34.163.129.102 ansible_user=scelios ansible_ssh_private_key_file=~/.ssh/id_rsa env=./.env docker=./docker
