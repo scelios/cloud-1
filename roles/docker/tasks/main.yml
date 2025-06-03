@@ -7,10 +7,12 @@
     group: "{{ ansible_user }}"
     mode: "0644"
 
-- name: Add ip to env
-  tags: install
+- name: Remove all Docker containers
+  tags: launch
   shell: |
-    export IPSERV={{ ansible_host }}
+    if [ "$(docker ps -aq)" != "" ]; then
+      docker rm -f $(docker ps -aq);
+    fi
 
 - name: Launch docker
   tags: launch
