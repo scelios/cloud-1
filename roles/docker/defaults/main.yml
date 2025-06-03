@@ -1,0 +1,3 @@
+# filepath: /media/sf_vm_partage/cloud1/roles/docker/defaults/main.yml
+docker_compose_src: "docker/docker-compose.yml"
+docker_compose_dest: "/home/{{ ansible_user }}/inception/docker/docker-compose.yml"

@@ -1,0 +1,19 @@
+- name: Copy docker
+  tags: launch
+  copy:
+    src: "{{ docker }}"
+    dest: "/home/{{ ansible_user }}/inception"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0644"
+
+- name: Add ip to env
+  tags: install
+  shell: |
+    export IPSERV={{ ansible_host }}
+
+- name: Launch docker
+  tags: launch
+  command:
+    chdir: "/home/{{ ansible_user }}/inception/docker"
+    cmd: "docker compose up -d"
