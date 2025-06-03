@@ -56,7 +56,7 @@ services:
     networks:
       - cloud_network
     ports:
-      - "8081:80"
+      - "127.0.0.1:8081:80"  # Only accessible from localhost
   
   nginx:
     image: nginx:alpine
